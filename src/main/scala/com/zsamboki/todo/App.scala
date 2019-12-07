@@ -17,7 +17,7 @@ object App extends IOApp {
   def createServer[F[_]: ContextShift: ConcurrentEffect: Timer]: Resource[F, Server[F]] =
     for {
       config <- Resource.liftF(parser.decodePathF[F, TodoConfig]("todo"))
-      dbEc <- ExecutionContexts.fixedThreadPool[F](config.databaseConfig.connections.poolSize)
+      dbEc <- ExecutionContexts.fixedThreadPool[F](config.databaseConfig.poolSize)
       blockingEc <- ExecutionContexts.cachedThreadPool[F]
       xa <- DatabaseConfig.transactor(config.databaseConfig, dbEc, Blocker.liftExecutionContext(blockingEc))
       todoRepository = TodoRepositoryInterpreter(xa)

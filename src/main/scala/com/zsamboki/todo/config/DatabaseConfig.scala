@@ -8,13 +8,12 @@ import io.circe.generic.semiauto._
 
 import scala.concurrent.ExecutionContext
 
-case class DatabaseConnectionsConfig(poolSize: Int)
 case class DatabaseConfig(
     url: String,
     driver: String,
     user: String,
     password: String,
-    connections: DatabaseConnectionsConfig,
+    poolSize: Int,
 )
 
 object DatabaseConfig {
@@ -36,7 +35,6 @@ object DatabaseConfig {
       )
       .as(())
 
-  implicit val databaseConnectionsDecoder: Decoder[DatabaseConnectionsConfig] = deriveDecoder
   implicit val databaseConfigDecoder: Decoder[DatabaseConfig] = deriveDecoder
 
 }
