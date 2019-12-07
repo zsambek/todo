@@ -4,12 +4,12 @@ import cats.effect.{Blocker, ConcurrentEffect, ContextShift, ExitCode, IO, IOApp
 import com.zsamboki.todo.config.{DatabaseConfig, TodoConfig}
 import com.zsamboki.todo.domain.todos.TodoService
 import com.zsamboki.todo.infrastructure.endpoint.TodoEndpoints
-import com.zsamboki.todo.infrastructure.repository.doobie.TodoRepositoryInterpreter
 import doobie.util.ExecutionContexts
 import io.circe.config.parser
 import org.http4s.server.{Router, Server}
 import org.http4s.server.blaze.BlazeServerBuilder
 import cats.syntax.functor._
+import com.zsamboki.todo.infrastructure.repository.TodoRepositoryInterpreter
 import org.http4s.implicits._
 
 object App extends IOApp {

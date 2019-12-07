@@ -1,4 +1,4 @@
-package com.zsamboki.todo.infrastructure.repository.doobie
+package com.zsamboki.todo.infrastructure.repository
 
 import cats.data.OptionT
 import cats.effect.Bracket
