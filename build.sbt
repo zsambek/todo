@@ -10,6 +10,8 @@ val CirceV = "0.12.3"
 val EnumeratumCirceV = "1.5.22"
 val DoobieV = "0.8.6"
 val KindProjectorV = "0.10.3"
+val Http4s = "0.21.0-M6"
+val ParadiseV = "2.1.0"
 
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % CatsV,
@@ -20,6 +22,9 @@ libraryDependencies ++= Seq(
   "org.tpolecat" %% "doobie-h2" % DoobieV,
   "org.tpolecat" %% "doobie-scalatest" % DoobieV,
   "org.tpolecat" %% "doobie-hikari" % DoobieV,
+  "org.http4s" %% "http4s-blaze-server" % Http4s,
+  "org.http4s" %% "http4s-circe" % Http4s,
+  "org.http4s" %% "http4s-dsl" % Http4s,
 )
 
 scalacOptions ++= Seq(
@@ -71,6 +76,11 @@ scalacOptions ++= Seq(
   "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
 )
 
+resolvers += Resolver.sonatypeRepo("releases")
+
 addCompilerPlugin(
-  "org.typelevel" %% "kind-projector" % KindProjectorV,
+  "org.typelevel" %% "kind-projector" % KindProjectorV
+)
+addCompilerPlugin(
+  "org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full
 )
