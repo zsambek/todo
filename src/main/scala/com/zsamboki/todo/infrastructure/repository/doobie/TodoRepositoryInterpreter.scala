@@ -2,7 +2,7 @@ package com.zsamboki.todo.infrastructure.repository.doobie
 
 import cats.data.OptionT
 import cats.effect.Bracket
-import com.zsamboki.todo.domain.todos.{Todo, TodoRepositoryAlgebra, TodoStatus}
+import com.zsamboki.todo.domain.todos.{Todo, TodoCreation, TodoRepositoryAlgebra, TodoStatus}
 import doobie._
 import doobie.implicits._
 import doobie.util.Meta
@@ -21,8 +21,8 @@ private object Queries {
          """.query[Todo]
   def insert(todo: Todo): Update0 =
     sql"""
-         INSERT INTO todos (id, name, status)
-         VALUES (${todo.id}, ${todo.name}, ${todo.status})
+         INSERT INTO todos (name, status)
+         VALUES (${todo.name}, ${todo.status})
          """.update
 
   def delete(id: Long): Update0 =
@@ -40,7 +40,7 @@ class TodoRepositoryInterpreter[F[_]: Bracket[*[_], Throwable]](val xa: Transact
     Queries
       .insert(todo)
       .withUniqueGeneratedKeys[Long]("id")
-      .map(id => todo.copy(id = id))
+      .map(id => todo.copy(id = id.some))
       .transact(xa)
 
   def get(id: Long): F[Option[Todo]] =
@@ -51,7 +51,7 @@ class TodoRepositoryInterpreter[F[_]: Bracket[*[_], Throwable]](val xa: Transact
 
   def remove(id: Long): F[Option[Todo]] =
     OptionT(get(id))
-      .semiflatMap(todo => Queries.delete(todo.id).run.transact(xa).as(todo))
+      .semiflatMap(todo => Queries.delete(id).run.transact(xa).as(todo))
       .value
 }
 
