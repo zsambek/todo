@@ -2,11 +2,11 @@ package com.zsamboki.todo.infrastructure.repository.doobie
 
 import cats.data.OptionT
 import cats.effect.Bracket
-import com.zsamboki.todo.domain.todos.{Todo, TodoCreation, TodoRepositoryAlgebra, TodoStatus}
+import cats.implicits._
+import com.zsamboki.todo.domain.todos.{Todo, TodoRepositoryAlgebra, TodoStatus}
 import doobie._
 import doobie.implicits._
 import doobie.util.Meta
-import cats.implicits._
 
 private object Queries {
 
