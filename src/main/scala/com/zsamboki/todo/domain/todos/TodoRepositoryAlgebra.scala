@@ -6,6 +6,6 @@ trait TodoRepositoryAlgebra[F[_]] {
 
   def get(id: Long): F[Option[Todo]]
 
-  def delete(id: Long): F[Option[Todo]]
+  def remove(id: Long): F[Option[Todo]]
 
 }

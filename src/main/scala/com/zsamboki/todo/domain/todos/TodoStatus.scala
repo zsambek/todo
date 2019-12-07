@@ -11,5 +11,5 @@ case object TodoStatus extends Enum[TodoStatus] with CirceEnum[TodoStatus] {
   case object Finished extends TodoStatus
   case object NotStarted extends TodoStatus
 
-  override val values: immutable.IndexedSeq[TodoStatus] = findValues
+  val values: immutable.IndexedSeq[TodoStatus] = findValues
 }

@@ -13,8 +13,8 @@ class TodoService[F[_]](todoRepository: TodoRepositoryAlgebra[F]) {
   def get(id: Long)(implicit F: Functor[F]): EitherT[F, NotFoundTodo.type, Todo] =
     EitherT.fromOptionF(todoRepository.get(id), NotFoundTodo)
 
-  def delete(id: Long)(implicit F: Functor[F]): F[Unit] = {
-    todoRepository.delete(id).as(())
+  def remove(id: Long)(implicit F: Functor[F]): F[Unit] = {
+    todoRepository.remove(id).as(())
   }
 
 }
