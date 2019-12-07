@@ -12,6 +12,9 @@ val DoobieV = "0.8.6"
 val KindProjectorV = "0.10.3"
 val Http4s = "0.21.0-M6"
 val ParadiseV = "2.1.0"
+val FlywayV = "6.1.0"
+val LogbackV = "1.2.3"
+val CirceConfigV = "0.7.0"
 
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % CatsV,
@@ -25,6 +28,9 @@ libraryDependencies ++= Seq(
   "org.http4s" %% "http4s-blaze-server" % Http4s,
   "org.http4s" %% "http4s-circe" % Http4s,
   "org.http4s" %% "http4s-dsl" % Http4s,
+  "ch.qos.logback" % "logback-classic" % LogbackV,
+  "org.flywaydb" % "flyway-core" % FlywayV,
+  "io.circe" %% "circe-config" % CirceConfigV
 )
 
 scalacOptions ++= Seq(
