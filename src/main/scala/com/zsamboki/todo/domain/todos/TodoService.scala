@@ -3,7 +3,6 @@ package com.zsamboki.todo.domain.todos
 import cats.Functor
 import cats.data.EitherT
 import com.zsamboki.todo.domain.NotFoundTodo
-import cats.implicits._
 
 class TodoService[F[_]](todoRepository: TodoRepositoryAlgebra[F]) {
 
@@ -13,8 +12,8 @@ class TodoService[F[_]](todoRepository: TodoRepositoryAlgebra[F]) {
   def get(id: Long)(implicit F: Functor[F]): EitherT[F, NotFoundTodo.type, Todo] =
     EitherT.fromOptionF(todoRepository.get(id), NotFoundTodo)
 
-  def remove(id: Long)(implicit F: Functor[F]): F[Unit] = {
-    todoRepository.remove(id).as(())
+  def remove(id: Long)(implicit F: Functor[F]): EitherT[F, NotFoundTodo.type, Todo] = {
+    EitherT.fromOptionF(todoRepository.remove(id), NotFoundTodo)
   }
 
 }

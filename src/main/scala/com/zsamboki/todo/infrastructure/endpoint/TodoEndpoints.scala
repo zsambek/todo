@@ -33,10 +33,10 @@ class TodoEndpoints[F[_]: Sync] extends Http4sDsl[F] {
 
   private def removeTodoEndpoint(todoService: TodoService[F]) = HttpRoutes.of[F] {
     case DELETE -> Root / LongVar(id) =>
-      for {
-        _ <- todoService.remove(id)
-        response <- Ok()
-      } yield response
+      todoService.remove(id).value.flatMap {
+        case Right(todo) => Ok(todo.asJson)
+        case Left(NotFoundTodo) => NotFound("Todo was not found!")
+      }
   }
 
   def endpoints(todoService: TodoService[F]): HttpRoutes[F] =
