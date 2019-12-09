@@ -25,6 +25,7 @@ object App extends IOApp {
       httpApp = Router("/" -> TodoEndpoints.endpoints(todoService)).orNotFound
       _ <- Resource.liftF(DatabaseConfig.init[IO](config.databaseConfig))
       server <- BlazeServerBuilder[IO]
+        .withNio2(true)
         .bindHttp(config.serverConfig.port, config.serverConfig.host)
         .withHttpApp(httpApp)
         .resource
