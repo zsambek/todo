@@ -5,7 +5,7 @@ version := "0.1"
 
 scalaVersion := "2.12.10"
 
-val CatsV = "2.0.0"
+val CatsV = "2.6.1"
 val CirceV = "0.12.3"
 val EnumeratumCirceV = "1.5.22"
 val DoobieV = "0.8.6"
