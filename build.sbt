@@ -12,7 +12,7 @@ val DoobieV = "0.8.6"
 val KindProjectorV = "0.10.3"
 val Http4s = "0.21.0-M6"
 val ParadiseV = "2.1.0"
-val FlywayV = "6.1.0"
+val FlywayV = "6.1.4"
 val LogbackV = "1.2.3"
 val CirceConfigV = "0.7.0"
 
