@@ -7,7 +7,7 @@ scalaVersion := "2.12.10"
 
 val CatsV = "2.0.0"
 val CirceV = "0.12.3"
-val EnumeratumCirceV = "1.5.22"
+val EnumeratumCirceV = "1.5.23"
 val DoobieV = "0.8.6"
 val KindProjectorV = "0.10.3"
 val Http4s = "0.21.0-M6"
